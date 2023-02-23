@@ -1,7 +1,7 @@
 describe('Scenario 2', () => {
     it('Should delete a user of the table', () => {
         //Visiting sandbox page
-        cy.visit('https://www.way2automation.com/angularjs-protractor/webtables/')
+        cy.visit('/angularjs-protractor/webtables/')
         
         // Asserting that the user novak really exists
         cy.get('[table-title="Smart Table example"]')

@@ -1,7 +1,7 @@
 describe('Scenario 1', () => {
     it('Should add a user in the table', () => {
         //Visiting sandbox page
-        cy.visit('https://www.way2automation.com/angularjs-protractor/webtables/')
+        cy.visit('/angularjs-protractor/webtables/')
         
         // Starting the flow to add a new user
         cy.contains('Add User').click()
