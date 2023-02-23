@@ -1,5 +1,5 @@
 describe('Scenario 1', () => {
-    it.only('Should add a user in the table', () => {
+    it('Should add a user in the table', () => {
         //Visiting sandbox page
         cy.visit('https://www.way2automation.com/angularjs-protractor/webtables/')
         
