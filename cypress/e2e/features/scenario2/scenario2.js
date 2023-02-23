@@ -1,29 +1,22 @@
 const {
     Given,
     When,
-    And,
     Then,
 } = require("@badeball/cypress-cucumber-preprocessor");
 
-Given("I am on the table page", () => {
-    cy.visit('/angularjs-protractor/webtables/')
+Given(/^I am on the page "([^"]*)"$/, (path) => {
+    cy.visit(path)
 })
 
-When("I delete the user", () => {
-    cy.fixture('existingUser').then((user) => {
-        cy.searchForUser(user.firstName)
-        cy.assertCreatedUser(user.firstName, user.lastName, user.userName, user.role, user.email, user.cellphone)
-    })
+When(/^I delete the user with data "([^"]*)", "([^"]*)", "([^"]*)", "([^"]*)", "([^"]*)" and "([^"]*)"$/, (firstName, lastName, userName, role, email, cellphone) => {
+    cy.searchForUser(firstName)
+    cy.assertCreatedUser(firstName, lastName, userName, role, email, cellphone)
     cy.cleanSearchInput()
-    cy.fixture('existingUser').then((user) => {
-        cy.deleteUserByUsername(user.userName)
-    })
+    cy.deleteUserByUsername(userName)
 })
 
-Then("I should validate the user has been successfully deleted", () => {
-    cy.fixture('existingUser').then((user) => {
-        cy.searchForUser(user.userName)
-        cy.assertUserNotExists(user.userName)
-    })
+Then(/^I should validate the user "([^"]*)" has been successfully deleted$/, (userName) => {
+    cy.searchForUser(userName)
+    cy.assertUserNotExists(userName)
     cy.cleanSearchInput()
 })

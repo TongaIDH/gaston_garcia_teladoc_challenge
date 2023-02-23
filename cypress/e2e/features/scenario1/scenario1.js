@@ -4,8 +4,8 @@ const {
     Then,
 } = require("@badeball/cypress-cucumber-preprocessor");
 
-Given("I am on the table page", () => {
-    cy.visit('/angularjs-protractor/webtables/')
+Given(/^I am on the page "([^"]*)"$/, (path) => {
+    cy.visit(path)
 })
 
 When(/^I fill the user data form with "([^"]*)", "([^"]*)", "([^"]*)", "([^"]*)", "([^"]*)", "([^"]*)" and click on save$/, (firstName, lastName, userName, password, email, cellphone) => {
