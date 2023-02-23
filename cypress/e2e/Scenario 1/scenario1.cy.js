@@ -4,20 +4,11 @@ describe('Scenario 1', () => {
     })
 
     it('Should add a user in the table', () => {
-        const firstName = 'Juanito'
-        const lastName = 'Arcoiris'
-        const userName = 'Juanito1993'
-        const password = 'pepito123'
-        const role = 'Customer'
-        const email = 'juanito23@hotmail.com'
-        const cellphone = '1122334455'
-        
-        cy.addNewUser(firstName, lastName, userName, password, email, cellphone)
-        
-        cy.searchForUser(firstName)
-
-        cy.assertCreatedUser(firstName, lastName, userName, role, email, cellphone)
-
+        cy.fixture('newUser').then((user) => {
+            cy.addNewUser(user.firstName, user.lastName, user.userName, user.password, user.email, user.cellphone)
+            cy.searchForUser(user.firstName)
+            cy.assertCreatedUser(user.firstName, user.lastName, user.userName, user.role, user.email, user.cellphone)
+        })    
         cy.cleanSearchInput()
     });
 })
