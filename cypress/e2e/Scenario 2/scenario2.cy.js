@@ -1,33 +1,28 @@
 describe('Scenario 2', () => {
+    before(() => {
+        cy.visit('/angularjs-protractor/webtables/')
+    })
+
     it('Should delete a user of the table', () => {
-        //Visiting sandbox page
-        cy.visit('https://www.way2automation.com/angularjs-protractor/webtables/')
-        
-        // Asserting that the user novak really exists
-        cy.get('[table-title="Smart Table example"]')
-            .find('tr')
-            .eq(5)
-            .find('td')
-            .eq(2)
-            .should('have.text', 'novak')
+        const firstName = 'Mark'
+        const lastName = 'Novak'
+        const userName = 'novak'
+        const role = 'Customer'
+        const email = 'asa@asd.cz'
+        const cellphone = '777888444'
 
-        // Deleting the user novak
-        cy.get('[table-title="Smart Table example"]')
-            .find('tr')
-            .eq(5)
-            .find('td')
-            .eq(10)
-            .children()
-            .click()
-        cy.get('.btn-primary')
-            .click()
+        cy.searchForUser(firstName)
 
-        // Asserting that the User Name novak doesn't exists anymore
-        cy.get('[table-title="Smart Table example"]')
-            .find('td')
-            .each(($el) => {
-                const data = $el.text()
-                expect(data).to.not.equal('novak')
-            })
+        cy.assertCreatedUser(firstName, lastName, userName, role, email, cellphone)
+
+        cy.cleanSearchInput()
+
+        cy.deleteUserByUsername(userName)
+
+        cy.searchForUser(userName)
+
+        cy.assertUserNotExists(userName)
+
+        cy.cleanSearchInput()
     });
 })

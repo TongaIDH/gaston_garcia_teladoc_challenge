@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:ide": "cypress open",
-    "test:headless": "cypress run",
+    "test:headless:chrome": "cypress run --browser chrome",
     "delete:results": "rm -r cypress/results/* || true",
 	  "report": "cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json",
 	  "mochawesome:report": "npx mochawesome-merge \"cypress/results/mochawesome/*.json\" > mochawesome.json && npx marge mochawesome.json",
