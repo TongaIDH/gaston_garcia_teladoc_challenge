@@ -17,5 +17,7 @@ describe('Scenario 1', () => {
         cy.searchForUser(firstName)
 
         cy.assertCreatedUser(firstName, lastName, userName, role, email, cellphone)
+
+        cy.cleanSearchInput()
     });
 })

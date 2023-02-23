@@ -48,10 +48,27 @@ Cypress.Commands.add('addNewUser', (firstName, lastName, userName, password, ema
     cy.get(saveButton).should('be.enabled').click()
 })
 
+Cypress.Commands.add('deleteUserByUsername', (userName) => {
+    const confirmDeleteButton = '.btn-primary'
+    const el = 'td'
+
+    cy.contains(userName)
+        .parent()
+        .find(el)
+        .eq(10)
+        .children().should('be.visible').click()
+    
+    cy.get(confirmDeleteButton).should('be.visible').click()
+})
+
 Cypress.Commands.add('searchForUser', (firstName) => {
     const searchInput = 'input[placeholder="Search"]'
-
     cy.get(searchInput).should('be.visible').type(firstName)
+})
+
+Cypress.Commands.add('cleanSearchInput', () => {
+    const searchInput = 'input[placeholder="Search"]'
+    cy.get(searchInput).should('be.visible').clear()
 })
 
 Cypress.Commands.add('assertCreatedUser', (firstName, lastName, userName, role, email, cellphone) => {
@@ -69,3 +86,15 @@ Cypress.Commands.add('assertCreatedUser', (firstName, lastName, userName, role, 
     cy.get(emailCell).should('be.visible').and('have.text', email)
     cy.get(cellphoneCell).should('be.visible').and('have.text', cellphone)
 })
+
+Cypress.Commands.add('assertUserNotExists', (userName) => {
+    const usersTable = '[table-title="Smart Table example"]'
+
+    cy.get(usersTable)
+        .find('td')
+        .each(($el) => {
+            const data = $el.text()
+            expect(data).to.not.equal(userName)
+        })
+})
+
