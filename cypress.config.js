@@ -41,6 +41,6 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: 'https://www.way2automation.com/',
     setupNodeEvents,
-    specPattern: "**/*.feature",
+    //specPattern: "**/*.feature",
   },
 });
