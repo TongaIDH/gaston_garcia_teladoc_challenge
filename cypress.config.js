@@ -40,7 +40,8 @@ module.exports = defineConfig({
 	viewportHeight: 1080,
   e2e: {
     baseUrl: 'https://www.way2automation.com/',
+    experimentalSessionAndOrigin: true,
     setupNodeEvents,
-    specPattern: "**/*.feature",
+    //specPattern: "**/*.feature",
   },
 });
