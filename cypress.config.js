@@ -28,6 +28,8 @@ async function setupNodeEvents(on, config) {
       }
     })
   )
+
+  config.env.variable = process.env.NODE_ENV ?? "THERE ARE NO VARIABLES"
   return config;
 }
 
@@ -42,11 +44,17 @@ module.exports = defineConfig({
     //baseUrl: 'https://www.way2automation.com/',
     baseUrl: 'https://pokedexpokemon.netlify.app/',
     setupNodeEvents,
-    retries: {
-      // Configure retries for 'cypress run' -- Default is 0
-      runMode: 1,
-      // Configure retries for 'cypress open' -- Default is 0
-      openMode: 1,
+    // retries: {
+    //   // Configure retries for 'cypress run' -- Default is 0
+    //   runMode: 1,
+    //   // Configure retries for 'cypress open' -- Default is 0
+    //   openMode: 1,
+    // },
+    env: {
+      credentials: {
+        user: "username",
+        password: "password",
+      }
     },
     //specPattern: "**/*.feature",
   },
